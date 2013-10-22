@@ -23,21 +23,29 @@ function slb_theme_example_init($themes) {
 		$base_path = substr($base_path, strlen($base_url));
 	}
 	$base_path .= '/' . basename( dirname( __FILE__ ) );
-	$themes->add('slb_theme_example', array (
+	
+	//Theme properties
+	//Uncomment properties to override parent theme's properties
+	$properties = array (
 		//Theme name
 		'name'			=> __('Example Theme', 'slb-theme-example'),
 		//Parent theme
 		'parent'		=> 'slb_baseline',
-		//Custom layout
+		//Custom layout file
 		/*'layout'		=> $base_path . '/layout.html',*/
-		//Custom scripts
+		//Custom scripts - Each script is an array containing the script's properties
+		//Example: array( $handle, $src [, $deps, $ver ] )
 		'scripts'		=> array (
-			array ( 'core', $base_path . '/js/client.js' ),
+			/*array ( 'core', $base_path . '/js/client.js' ),*/
 		),
+		//Custom styles - Each style is an array containing the style's properties
+		//Example: array( $handle, $src [, $deps, $ver] )
 		'styles'		=> array (
-			array ( 'core', $base_path . '/css/styles.css' ),
+			/*array ( 'core', $base_path . '/css/styles.css' ),*/
 		),
-	));
+	);
+	
+	$themes->add('slb_theme_example', $properties);
 }
 
 add_action('slb_themes_init', 'slb_theme_example_init');
