@@ -16,8 +16,13 @@ Copyright 2013 Sol Marchessault (sol@archetyped.com)
  * @param SLB_Themes $themes Themes controller
  */
 function slb_theme_example_init($themes) {
-	//Path to plugin directory
-	$base_path = str_replace('\\', '/', substr(dirname(__FILE__), strlen(rtrim(ABSPATH, "\/\\")))); 
+	//Path to theme's directory
+	$base_path = plugins_url();
+	$base_url = site_url();
+	if ( 0 === strpos($base_path, $base_url) ) {
+		$base_path = substr($base_path, strlen($base_url));
+	}
+	$base_path .= '/' . basename( dirname( __FILE__ ) );
 	$themes->add('slb_theme_example', array (
 		//Theme name
 		'name'			=> __('Example Theme', 'slb-theme-example'),
